@@ -7,6 +7,10 @@ st.set_page_config(
 
 st.title("1099 Quarterly Tax Planner")
 
+# Initialize session state early so weekly_monthly_bill_reserve is available
+if "monthly_bills" not in st.session_state:
+    st.session_state.monthly_bills = []
+
 st.divider()
 
 # =========================
@@ -170,8 +174,8 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.metric(
-        "Arizona State Tax"
-        f"{arizona_state_tax:,.2f}"
+        "Arizona State Tax",
+        f"${arizona_state_tax:,.2f}"
     )
 
     st.metric(
@@ -200,6 +204,12 @@ st.divider()
 # =========================
 # WEEKLY BILLS
 # =========================
+
+# Compute monthly bill reserve from session state before it's displayed
+monthly_bills_total = sum(
+    bill["amount"] for bill in st.session_state.monthly_bills
+)
+weekly_monthly_bill_reserve = monthly_bills_total * 12 / 52
 
 st.header("Weekly Budget")
 
@@ -236,10 +246,7 @@ st.divider()
 # MONTHLY BILLS Ledger
 # =========================
 
-st.header ("Monthly Bills")
-
-if "monthly bills" not in st.session_state:
-    st.session_state.monthly_bills = []
+st.header("Monthly Bills")
 
 with st.expander("Add Monthly Bill", expanded=True):
     bill_name = st.text_input("Bill Name", placeholder="Netflix, Insurance, GitHub, Credit Card")
@@ -256,12 +263,6 @@ with st.expander("Add Monthly Bill", expanded=True):
             st.success(f"Added {bill_name}")
         else:
             st.warning("Enter a bill name and amount.")
-
-monthly_bills_total = sum(
-    bill["amount"] for bill in st.session_state.monthly_bills
-)
-
-weekly_monthly_bill_reserve = monthly_bills_total * 12 / 52
 
 st.metric("Monthly Bills Total", f"${monthly_bills_total:,.2f}")
 st.metric("Weekly Reserve for Monthly Bills", f"${weekly_monthly_bill_reserve:,.2f}")
@@ -309,21 +310,21 @@ monthly_take_home = annual_take_home / 12
 
 col5, col6, col7 = st.columns(3)
 
-with col15:
+with col5:
     st.metric(
         "Annual Take Home",
-        f"${monthly_take_home:,.2f}"
+        f"${annual_take_home:,.2f}"
     )
 
-with col16:
+with col6:
     st.metric(
         "Monthly Take Home",
         f"${monthly_take_home:,.2f}"
     )
 
-with col17:
+with col7:
     st.metric(
-        "Weekly Spendable"
+        "Weekly Spendable",
         f"${remaining_weekly_cash:,.2f}"
     )
 
