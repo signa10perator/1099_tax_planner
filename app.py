@@ -6,7 +6,226 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("1099 Quarterly Tax Planner")
+# =========================
+# ART DECO CSS
+# =========================
+
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Josefin+Sans:wght@300;400;600;700&display=swap');
+
+/* BASE */
+html, body,
+[data-testid="stAppViewContainer"],
+[data-testid="stMain"] {
+    background-color: #0a0a08 !important;
+    color: #e8dfc8;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+[data-testid="stMainBlockContainer"] {
+    padding-top: 2.5rem;
+    max-width: 1100px;
+}
+
+[data-testid="stHeader"],
+[data-testid="stToolbar"],
+footer, #MainMenu {
+    display: none !important;
+}
+
+/* TITLE */
+h1 {
+    font-family: 'Cinzel', serif !important;
+    color: #c8a84c !important;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-size: 1.9rem !important;
+    font-weight: 700 !important;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid #c8a84c;
+    margin-bottom: 0.25rem !important;
+}
+
+/* SECTION HEADERS */
+h2 {
+    font-family: 'Cinzel', serif !important;
+    color: #c8a84c !important;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    border-left: 3px solid #c8a84c;
+    padding-left: 0.75rem;
+    margin-top: 0.25rem !important;
+}
+
+h3 {
+    font-family: 'Josefin Sans', sans-serif !important;
+    color: #7a6e48 !important;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+}
+
+/* DIVIDERS */
+hr {
+    border: none !important;
+    border-top: 1px solid #1e1c12 !important;
+    margin: 1.75rem 0 !important;
+}
+
+/* METRICS */
+[data-testid="metric-container"] {
+    background-color: #0f0f0a !important;
+    border: 1px solid #1e1c12 !important;
+    border-left: 3px solid #c8a84c !important;
+    padding: 1rem 1.25rem !important;
+    border-radius: 0 !important;
+}
+
+[data-testid="stMetricLabel"] p {
+    color: #5a5030 !important;
+    font-family: 'Josefin Sans', sans-serif !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+    font-size: 0.6rem !important;
+    font-weight: 700 !important;
+}
+
+[data-testid="stMetricValue"] div {
+    color: #c8a84c !important;
+    font-family: 'Josefin Sans', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 1.5rem !important;
+    letter-spacing: 0.03em;
+}
+
+/* LABELS */
+label {
+    color: #5a5030 !important;
+    font-family: 'Josefin Sans', sans-serif !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    font-size: 0.6rem !important;
+    font-weight: 700 !important;
+}
+
+/* INPUTS */
+[data-testid="stNumberInput"] input,
+[data-testid="stTextInput"] input,
+[data-testid="stDateInput"] input {
+    background-color: #0f0f0a !important;
+    border: none !important;
+    border-bottom: 1px solid #2e2a18 !important;
+    border-radius: 0 !important;
+    color: #e8dfc8 !important;
+    font-family: 'Josefin Sans', sans-serif !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 0.04em;
+    padding: 0.4rem 0 !important;
+}
+
+[data-testid="stNumberInput"] input:focus,
+[data-testid="stTextInput"] input:focus,
+[data-testid="stDateInput"] input:focus {
+    border-bottom: 1px solid #c8a84c !important;
+    box-shadow: none !important;
+}
+
+/* BUTTONS */
+.stButton > button {
+    background-color: transparent !important;
+    border: 1px solid #c8a84c !important;
+    color: #c8a84c !important;
+    font-family: 'Josefin Sans', sans-serif !important;
+    letter-spacing: 0.2em !important;
+    text-transform: uppercase !important;
+    font-size: 0.6rem !important;
+    font-weight: 700 !important;
+    border-radius: 0 !important;
+    transition: all 0.15s ease !important;
+    padding: 0.45rem 1.2rem !important;
+}
+
+.stButton > button:hover {
+    background-color: #c8a84c !important;
+    color: #0a0a08 !important;
+}
+
+/* EXPANDER */
+[data-testid="stExpander"] {
+    background-color: #0d0d09 !important;
+    border: 1px solid #1e1c12 !important;
+    border-radius: 0 !important;
+}
+
+[data-testid="stExpander"] summary span p {
+    color: #7a6e48 !important;
+    font-family: 'Josefin Sans', sans-serif !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    font-size: 0.65rem !important;
+    font-weight: 700 !important;
+}
+
+/* ALERTS */
+[data-testid="stAlert"] {
+    border-radius: 0 !important;
+    background-color: #0f0f0a !important;
+    border: 1px solid #1e1c12 !important;
+    border-left: 3px solid #c8a84c !important;
+    color: #7a6e48 !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.05em;
+}
+
+/* CAPTION */
+[data-testid="stCaptionContainer"] p {
+    color: #2e2a18 !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    font-size: 0.55rem !important;
+}
+
+/* CHECK HISTORY TABLE */
+.deco-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Josefin Sans', sans-serif;
+    margin-top: 0.75rem;
+}
+
+.deco-table thead tr {
+    border-bottom: 1px solid #c8a84c;
+}
+
+.deco-table th {
+    color: #c8a84c;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 0 0.5rem 0.6rem 0;
+    text-align: left;
+}
+
+.deco-table td {
+    border-bottom: 1px solid #141410;
+    color: #e8dfc8;
+    padding: 0.7rem 0.5rem 0.7rem 0;
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+}
+
+.deco-table tr:last-child td { border-bottom: none; }
+.deco-table .col-date  { color: #5a5030; font-size: 0.75rem; letter-spacing: 0.06em; }
+.deco-table .col-check { color: #c8a84c; font-weight: 600; }
+.deco-table .col-tax   { color: #7a6e48; }
+.deco-table .col-keep  { color: #e8dfc8; }
+</style>
+""", unsafe_allow_html=True)
 
 # =========================
 # SESSION STATE
@@ -18,7 +237,6 @@ if "monthly_bills" not in st.session_state:
 if "checks" not in st.session_state:
     st.session_state.checks = []
 
-# Pre-compute monthly bill reserve (needed before Weekly Budget)
 monthly_bills_total = sum(b["amount"] for b in st.session_state.monthly_bills)
 weekly_monthly_bill_reserve = monthly_bills_total * 12 / 52
 
@@ -43,6 +261,10 @@ def compute_check_taxes(amount):
 # =========================
 # INCOME
 # =========================
+
+st.title("1099 Quarterly Tax Planner")
+
+st.divider()
 
 st.header("Income")
 
@@ -80,27 +302,23 @@ if add_check:
     else:
         st.warning("Enter a check amount.")
 
-# Accumulating tax accounts
-total_se_account = sum(c["se"] for c in st.session_state.checks)
-total_fed_account = sum(c["fed"] for c in st.session_state.checks)
-total_state_account = sum(c["state"] for c in st.session_state.checks)
-total_gross = sum(c["amount"] for c in st.session_state.checks)
+total_se_account    = sum(c["se"]     for c in st.session_state.checks)
+total_fed_account   = sum(c["fed"]    for c in st.session_state.checks)
+total_state_account = sum(c["state"]  for c in st.session_state.checks)
+total_gross         = sum(c["amount"] for c in st.session_state.checks)
 
-avg_check = total_gross / len(st.session_state.checks) if st.session_state.checks else 0.0
+avg_check       = total_gross / len(st.session_state.checks) if st.session_state.checks else 0.0
 projected_annual = avg_check * 52
 
-col_acc1, col_acc2, col_acc3, col_acc4 = st.columns(4)
+col_a1, col_a2, col_a3, col_a4 = st.columns(4)
 
-with col_acc1:
+with col_a1:
     st.metric("SE Tax Account", f"${total_se_account:,.2f}")
-
-with col_acc2:
+with col_a2:
     st.metric("Federal Account", f"${total_fed_account:,.2f}")
-
-with col_acc3:
+with col_a3:
     st.metric("State Account", f"${total_state_account:,.2f}")
-
-with col_acc4:
+with col_a4:
     st.metric("Projected Annual Gross", f"${projected_annual:,.2f}")
 
 st.divider()
@@ -112,18 +330,30 @@ st.divider()
 st.header("Weekly Budget")
 
 if st.session_state.checks:
-    col_h1, col_h2, col_h3, col_h4 = st.columns([2, 2, 2, 2])
-    col_h1.markdown("**Date**")
-    col_h2.markdown("**Check Total**")
-    col_h3.markdown("**Tax Reserve**")
-    col_h4.markdown("**Remaining Spendable**")
-
+    rows_html = ""
     for c in reversed(st.session_state.checks):
-        col_r1, col_r2, col_r3, col_r4 = st.columns([2, 2, 2, 2])
-        col_r1.write(c["date"].strftime("%m/%d/%Y"))
-        col_r2.write(f"${c['amount']:,.2f}")
-        col_r3.write(f"${c['reserve']:,.2f}")
-        col_r4.write(f"${c['remaining']:,.2f}")
+        rows_html += f"""
+        <tr>
+            <td class="col-date">{c["date"].strftime("%m/%d/%Y")}</td>
+            <td class="col-check">${c['amount']:,.2f}</td>
+            <td class="col-tax">${c['reserve']:,.2f}</td>
+            <td class="col-keep">${c['remaining']:,.2f}</td>
+        </tr>
+        """
+
+    st.markdown(f"""
+    <table class="deco-table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Check Total</th>
+                <th>Tax Reserve</th>
+                <th>Remaining Spendable</th>
+            </tr>
+        </thead>
+        <tbody>{rows_html}</tbody>
+    </table>
+    """, unsafe_allow_html=True)
 
 else:
     st.info("Add your first check above to see your budget breakdown.")
@@ -137,8 +367,8 @@ st.divider()
 st.header("Monthly Bills")
 
 with st.expander("Add Monthly Bill", expanded=True):
-    bill_name = st.text_input("Bill Name", placeholder="Netflix, Insurance, GitHub, Credit Card")
-    bill_amount = st.number_input("Monthly Amount", min_value=0.0, step=1.0)
+    bill_name    = st.text_input("Bill Name", placeholder="Netflix, Insurance, GitHub, Credit Card")
+    bill_amount  = st.number_input("Monthly Amount", min_value=0.0, step=1.0)
     bill_due_date = st.date_input("Due Date")
 
     if st.button("Add Bill"):
@@ -152,12 +382,14 @@ with st.expander("Add Monthly Bill", expanded=True):
         else:
             st.warning("Enter a bill name and amount.")
 
-# Recompute after potential additions
-monthly_bills_total = sum(b["amount"] for b in st.session_state.monthly_bills)
+monthly_bills_total         = sum(b["amount"] for b in st.session_state.monthly_bills)
 weekly_monthly_bill_reserve = monthly_bills_total * 12 / 52
 
-st.metric("Monthly Bills Total", f"${monthly_bills_total:,.2f}")
-st.metric("Weekly Reserve for Monthly Bills", f"${weekly_monthly_bill_reserve:,.2f}")
+col_mb1, col_mb2 = st.columns(2)
+with col_mb1:
+    st.metric("Monthly Bills Total", f"${monthly_bills_total:,.2f}")
+with col_mb2:
+    st.metric("Weekly Reserve for Monthly Bills", f"${weekly_monthly_bill_reserve:,.2f}")
 
 if st.session_state.monthly_bills:
     st.subheader("Bills List")
@@ -167,13 +399,10 @@ if st.session_state.monthly_bills:
 
         with col_b1:
             st.write(bill["name"])
-
         with col_b2:
             st.write(f"${bill['amount']:,.2f}")
-
         with col_b3:
             st.write(bill["due_date"].strftime("%B %d"))
-
         with col_b4:
             if st.button("Delete", key=f"delete_bill_{index}"):
                 st.session_state.monthly_bills.pop(index)
@@ -187,22 +416,17 @@ st.divider()
 
 st.header("Business Deductions")
 
-business_miles = st.number_input("Business Miles", min_value=0.0, step=100.0)
-mileage_deduction = business_miles * 0.725
-
-home_office = st.number_input("Home Office Deduction", min_value=0.0, step=100.0)
-tools_equipment = st.number_input("Tools & Equipment", min_value=0.0, step=100.0)
-health_insurance = st.number_input("Health Insurance", min_value=0.0, step=100.0)
-professional_services = st.number_input("Professional Services", min_value=0.0, step=100.0)
-other_deductions = st.number_input("Other Deductions", min_value=0.0, step=100.0)
+business_miles       = st.number_input("Business Miles",          min_value=0.0, step=100.0)
+mileage_deduction    = business_miles * 0.725
+home_office          = st.number_input("Home Office Deduction",   min_value=0.0, step=100.0)
+tools_equipment      = st.number_input("Tools & Equipment",       min_value=0.0, step=100.0)
+health_insurance     = st.number_input("Health Insurance",        min_value=0.0, step=100.0)
+professional_services = st.number_input("Professional Services",  min_value=0.0, step=100.0)
+other_deductions     = st.number_input("Other Deductions",        min_value=0.0, step=100.0)
 
 total_deductions = (
-    mileage_deduction
-    + home_office
-    + tools_equipment
-    + health_insurance
-    + professional_services
-    + other_deductions
+    mileage_deduction + home_office + tools_equipment
+    + health_insurance + professional_services + other_deductions
 )
 
 st.metric("Total Deductions", f"${total_deductions:,.2f}")
@@ -215,34 +439,27 @@ st.divider()
 
 st.header("Tax Calculations")
 
-net_se_income = max(projected_annual - total_deductions, 0)
-
-se_taxable_income = net_se_income * 0.9235
-self_employment_tax = se_taxable_income * 0.153
-half_se_tax_deduction = self_employment_tax / 2
-
-standard_deduction = 16100
-federal_taxable_income = max(
-    net_se_income - half_se_tax_deduction - standard_deduction,
-    0
-)
-
-federal_income_tax = federal_taxable_income * 0.12
-arizona_state_tax = net_se_income * 0.025
-
-annual_total_tax = self_employment_tax + federal_income_tax + arizona_state_tax
-quarterly_payment = annual_total_tax / 4
+net_se_income          = max(projected_annual - total_deductions, 0)
+se_taxable_income      = net_se_income * 0.9235
+self_employment_tax    = se_taxable_income * 0.153
+half_se_tax_deduction  = self_employment_tax / 2
+standard_deduction     = 16100
+federal_taxable_income = max(net_se_income - half_se_tax_deduction - standard_deduction, 0)
+federal_income_tax     = federal_taxable_income * 0.12
+arizona_state_tax      = net_se_income * 0.025
+annual_total_tax       = self_employment_tax + federal_income_tax + arizona_state_tax
+quarterly_payment      = annual_total_tax / 4
 
 col_t1, col_t2 = st.columns(2)
 
 with col_t1:
-    st.metric("Arizona State Tax", f"${arizona_state_tax:,.2f}")
-    st.metric("Self-Employment Tax", f"${self_employment_tax:,.2f}")
-    st.metric("Federal Income Tax", f"${federal_income_tax:,.2f}")
+    st.metric("Arizona State Tax",    f"${arizona_state_tax:,.2f}")
+    st.metric("Self-Employment Tax",  f"${self_employment_tax:,.2f}")
+    st.metric("Federal Income Tax",   f"${federal_income_tax:,.2f}")
 
 with col_t2:
     st.metric("Estimated Annual Taxes", f"${annual_total_tax:,.2f}")
-    st.metric("Quarterly Payment", f"${quarterly_payment:,.2f}")
+    st.metric("Quarterly Payment",      f"${quarterly_payment:,.2f}")
 
 st.divider()
 
@@ -254,8 +471,8 @@ st.header("Final Totals")
 
 weekly_bills = st.number_input("Weekly Bills", min_value=0.0, step=50.0)
 
-latest_check = st.session_state.checks[-1] if st.session_state.checks else None
-weekly_gross_pay = latest_check["amount"] if latest_check else 0.0
+latest_check      = st.session_state.checks[-1] if st.session_state.checks else None
+weekly_gross_pay  = latest_check["amount"]  if latest_check else 0.0
 weekly_tax_reserve = latest_check["reserve"] if latest_check else 0.0
 
 remaining_weekly_cash = (
@@ -267,23 +484,16 @@ remaining_weekly_cash = (
 
 monthly_total_obligations = weekly_bills * 4 + monthly_bills_total
 
-annual_take_home = (
-    projected_annual
-    - annual_total_tax
-    - (monthly_total_obligations * 12)
-)
-
+annual_take_home  = projected_annual - annual_total_tax - (monthly_total_obligations * 12)
 monthly_take_home = annual_take_home / 12
 
 col_f1, col_f2, col_f3 = st.columns(3)
 
 with col_f1:
-    st.metric("Annual Take Home", f"${annual_take_home:,.2f}")
-
+    st.metric("Annual Take Home",   f"${annual_take_home:,.2f}")
 with col_f2:
-    st.metric("Monthly Take Home", f"${monthly_take_home:,.2f}")
-
+    st.metric("Monthly Take Home",  f"${monthly_take_home:,.2f}")
 with col_f3:
-    st.metric("Weekly Spendable", f"${remaining_weekly_cash:,.2f}")
+    st.metric("Weekly Spendable",   f"${remaining_weekly_cash:,.2f}")
 
-st.caption("2026 mileage rate: $0.725/mile | Estimates only")
+st.caption("2026 mileage rate: $0.725/mile  ·  Estimates only — not financial advice")
