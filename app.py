@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 from datetime import date, datetime
 from supabase import create_client
@@ -244,9 +245,12 @@ input[type="password"] {
 # SUPABASE CLIENT
 # =========================
 
+def get_secret(key):
+    return os.environ.get(key) or st.secrets.get(key)
+
 supabase = create_client(
-    st.secrets["SUPABASE_URL"],
-    st.secrets["SUPABASE_KEY"]
+    get_secret("SUPABASE_URL"),
+    get_secret("SUPABASE_KEY")
 )
 
 # =========================
