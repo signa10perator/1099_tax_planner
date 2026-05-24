@@ -262,6 +262,7 @@ if "sb_access_token" in st.session_state:
             st.session_state["sb_access_token"],
             st.session_state["sb_refresh_token"]
         )
+        supabase.postgrest.auth(st.session_state["sb_access_token"])
         user_id    = st.session_state["sb_user_id"]
         user_email = st.session_state["sb_user_email"]
     except Exception:
