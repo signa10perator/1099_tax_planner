@@ -10,12 +10,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-st.markdown("""
-<style>
-section[data-testid="stSidebar"] { display: flex !important; }
-[data-testid="collapsedControl"] { display: none !important; }
-</style>
-""", unsafe_allow_html=True)
 
 # =========================
 # CSS
@@ -47,6 +41,11 @@ footer, #MainMenu {
 [data-testid="stHeader"] {
     background: transparent !important;
     border-bottom: none !important;
+}
+
+[data-testid="collapsedControl"] {
+    display: flex !important;
+    color: #c8a84c !important;
 }
 
 /* SIDEBAR */
