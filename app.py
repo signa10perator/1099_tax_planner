@@ -31,10 +31,15 @@ html, body,
     max-width: 1200px;
 }
 
-[data-testid="stHeader"],
 [data-testid="stToolbar"],
+[data-testid="stDecoration"],
 footer, #MainMenu {
     display: none !important;
+}
+
+[data-testid="stHeader"] {
+    background: transparent !important;
+    border-bottom: none !important;
 }
 
 /* SIDEBAR */
