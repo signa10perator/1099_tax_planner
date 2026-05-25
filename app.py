@@ -924,6 +924,13 @@ st.divider()
 
 if page == "Control Console":
 
+    # Pre-compute percentages
+    pct  = (annual_total_tax / projected_annual * 100)        if projected_annual > 0 else 0
+    pct2 = (monthly_bills_total * 12 / projected_annual * 100) if projected_annual > 0 else 0
+    pct3 = (max(annual_take_home, 0) / projected_annual * 100) if projected_annual > 0 else 0
+
+    q_label, q_date, q_days = next_deadline()
+
     st.markdown("""
     <div>
         <div class="status-bar">
@@ -939,61 +946,55 @@ if page == "Control Console":
 
     st.divider()
 
-    col_g1, col_g2, col_g3, col_alert = st.columns([2, 2, 2, 1])
+    col_g1, col_g2, col_g3 = st.columns(3)
 
     with col_g1:
         st.markdown('<div class="gauge-label">Mandatory Extraction</div>', unsafe_allow_html=True)
         st.markdown('<div class="gauge-sublabel">Est. Tax Obligation</div>', unsafe_allow_html=True)
-        fig = make_gauge(annual_total_tax, projected_annual, "#8b1a1a", "HIGH EXTRACTION ZONE")
-        st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+        st.plotly_chart(make_gauge(annual_total_tax, projected_annual, "#8b1a1a", ""), use_container_width=True, config={"displayModeBar": False})
         st.markdown('<div class="gauge-flavor" style="color:#8b1a1a;">High Extraction Zone</div>', unsafe_allow_html=True)
         st.metric("Annual Tax Obligation", f"${annual_total_tax:,.2f}")
-        pct = (annual_total_tax / projected_annual * 100) if projected_annual > 0 else 0
         st.metric("Extraction Rate", f"{pct:.1f}% of Income")
 
     with col_g2:
         st.markdown('<div class="gauge-label">Reserve Allocation</div>', unsafe_allow_html=True)
         st.markdown('<div class="gauge-sublabel">Monthly Obligations</div>', unsafe_allow_html=True)
-        fig = make_gauge(monthly_bills_total * 12, projected_annual, "#c8a84c", "FORTIFY YOUR POSITION")
-        st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+        st.plotly_chart(make_gauge(monthly_bills_total * 12, projected_annual, "#c8a84c", ""), use_container_width=True, config={"displayModeBar": False})
         st.markdown('<div class="gauge-flavor" style="color:#c8a84c;">Fortify Your Position</div>', unsafe_allow_html=True)
         st.metric("Annual Obligations", f"${monthly_bills_total * 12:,.2f}")
-        pct2 = (monthly_bills_total * 12 / projected_annual * 100) if projected_annual > 0 else 0
         st.metric("Reserve Rate", f"{pct2:.1f}% of Income")
 
     with col_g3:
         st.markdown('<div class="gauge-label">Survival Balance</div>', unsafe_allow_html=True)
         st.markdown('<div class="gauge-sublabel">Discretionary Funds</div>', unsafe_allow_html=True)
-        fig = make_gauge(max(annual_take_home, 0), projected_annual, "#2d7a6b", "REMAINING CONTROL")
-        st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+        st.plotly_chart(make_gauge(max(annual_take_home, 0), projected_annual, "#2d7a6b", ""), use_container_width=True, config={"displayModeBar": False})
         st.markdown('<div class="gauge-flavor" style="color:#2d7a6b;">Remaining Control</div>', unsafe_allow_html=True)
         st.metric("Annual Take Home", f"${annual_take_home:,.2f}")
-        pct3 = (max(annual_take_home, 0) / projected_annual * 100) if projected_annual > 0 else 0
         st.metric("Survival Rate", f"{pct3:.1f}% of Income")
 
-    with col_alert:
-        q_label, q_date, q_days = next_deadline()
-        alert_html = '<div class="alert-panel"><div class="alert-title">System Alerts</div>'
-        if q_days is not None:
-            color = "#8b1a1a" if q_days <= 30 else "#c8a84c"
-            alert_html += f"""
-            <div class="alert-item" style="color:{color};">Tax Deadline Approaching</div>
-            <div class="alert-detail">{q_label} Estimated Payment<br>Due in {q_days} Days</div>
-            """
-        alert_html += f"""
-        <div class="alert-item">Extraction Pressure</div>
-        <div class="alert-detail">2026 Effective Rate<br>{pct:.1f}%</div>
-        <div class="alert-item" style="color:#4a4228;">System Notice</div>
-        <div class="alert-detail">The more you earn,<br>the more they take.<br>Plan accordingly.</div>
-        </div>"""
-        st.markdown(alert_html, unsafe_allow_html=True)
+    st.divider()
 
-    st.markdown("""
-    <div class="manifesto">
-        <div class="manifesto-main">You don't work for them.<br>You work despite them.</div>
-        <div class="manifesto-sub">This terminal gives you the edge they don't want you to have.</div>
-    </div>
-    """, unsafe_allow_html=True)
+    col_left, col_right = st.columns([3, 2])
+
+    with col_left:
+        st.markdown("""
+        <div class="manifesto">
+            <div class="manifesto-main">You don't work for them.<br>You work despite them.</div>
+            <div class="manifesto-sub">This terminal gives you the edge they don't want you to have.</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col_right:
+        st.markdown('<div class="alert-title">System Alerts</div>', unsafe_allow_html=True)
+        if q_days is not None:
+            alert_color = "#8b1a1a" if q_days <= 30 else "#c8a84c"
+            st.markdown(f'<div class="alert-item" style="color:{alert_color};">Tax Deadline Approaching</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="alert-detail">{q_label} Estimated Payment — Due in {q_days} Days</div>', unsafe_allow_html=True)
+        rate_label = f"{pct:.1f}% of Income" if projected_annual > 0 else "Log income to calculate"
+        st.markdown('<div class="alert-item">Extraction Pressure</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="alert-detail">2026 Effective Rate — {rate_label}</div>', unsafe_allow_html=True)
+        st.markdown('<div class="alert-item" style="color:#4a4228;">System Notice</div>', unsafe_allow_html=True)
+        st.markdown('<div class="alert-detail">The more you earn, the more they take. Plan accordingly.</div>', unsafe_allow_html=True)
 
 elif page == "Income Log":
 
