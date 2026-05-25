@@ -246,7 +246,13 @@ input[type="password"] {
 # =========================
 
 def get_secret(key):
-    return os.environ.get(key) or st.secrets.get(key)
+    val = os.environ.get(key)
+    if val:
+        return val
+    try:
+        return st.secrets[key]
+    except Exception:
+        return None
 
 supabase = create_client(
     get_secret("SUPABASE_URL"),
