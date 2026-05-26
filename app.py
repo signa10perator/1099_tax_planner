@@ -46,6 +46,24 @@ footer, #MainMenu {
 [data-testid="collapsedControl"] {
     display: flex !important;
     color: #c8a84c !important;
+    background: #0a0a08 !important;
+    border: 1px solid #c8a84c !important;
+    padding: 0.4rem !important;
+    border-radius: 0 !important;
+}
+
+@media (max-width: 768px) {
+    [data-testid="collapsedControl"] {
+        position: fixed !important;
+        top: 0.75rem !important;
+        left: 0.75rem !important;
+        z-index: 9999 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 2.25rem !important;
+        height: 2.25rem !important;
+    }
 }
 
 /* SIDEBAR */
@@ -86,7 +104,7 @@ section[data-testid="stSidebar"] [data-testid="stRadio"] div[role="radiogroup"] 
 }
 
 section[data-testid="stSidebar"] [data-testid="stRadio"] div[role="radiogroup"] > label p {
-    color: #4a4228 !important;
+    color: #8a7a55 !important;
     font-size: 0.6rem !important;
     letter-spacing: 0.16em !important;
     font-weight: 700 !important;
@@ -163,7 +181,7 @@ hr {
 }
 
 [data-testid="stMetricLabel"] p {
-    color: #4a4228 !important;
+    color: #8a7a55 !important;
     font-family: 'Josefin Sans', sans-serif !important;
     letter-spacing: 0.14em !important;
     text-transform: uppercase !important;
@@ -180,7 +198,7 @@ hr {
 
 /* LABELS */
 label {
-    color: #4a4228 !important;
+    color: #8a7a55 !important;
     font-family: 'Josefin Sans', sans-serif !important;
     letter-spacing: 0.12em !important;
     text-transform: uppercase !important;
@@ -195,7 +213,7 @@ label {
 input[type="password"] {
     background-color: #050504 !important;
     border: none !important;
-    border-bottom: 1px solid #1e1c12 !important;
+    border-bottom: 1px solid #3a3428 !important;
     border-radius: 0 !important;
     color: #e8dfc8 !important;
     font-family: 'Josefin Sans', sans-serif !important;
@@ -260,7 +278,7 @@ input[type="password"] {
 
 /* CAPTION */
 [data-testid="stCaptionContainer"] p {
-    color: #1e1c12 !important;
+    color: #3a3428 !important;
     letter-spacing: 0.1em !important;
     text-transform: uppercase !important;
     font-size: 0.52rem !important;
@@ -298,7 +316,7 @@ input[type="password"] {
 
 .terminal-sub {
     font-family: 'Josefin Sans', sans-serif;
-    color: #4a4228;
+    color: #8a7a55;
     font-size: 0.58rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -341,7 +359,7 @@ input[type="password"] {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 0.55rem;
     letter-spacing: 0.12em;
-    color: #2a2218;
+    color: #6a5e40;
 }
 
 .alert-panel {
@@ -372,7 +390,7 @@ input[type="password"] {
 
 .alert-detail {
     font-family: 'Josefin Sans', sans-serif;
-    color: #4a4228;
+    color: #8a7a55;
     font-size: 0.55rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -400,7 +418,7 @@ input[type="password"] {
 
 .manifesto-sub {
     font-family: 'Josefin Sans', sans-serif;
-    color: #4a4228;
+    color: #8a7a55;
     font-size: 0.58rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -440,7 +458,7 @@ input[type="password"] {
 
 .logo-sub-label {
     font-family: 'Josefin Sans', sans-serif;
-    color: #2a2218;
+    color: #6a5e40;
     font-size: 0.5rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
@@ -454,7 +472,7 @@ input[type="password"] {
 
 .sidebar-motto {
     font-family: 'Josefin Sans', sans-serif;
-    color: #4a4228;
+    color: #8a7a55;
     font-size: 0.55rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -473,7 +491,7 @@ input[type="password"] {
 
 .sidebar-sub {
     font-family: 'Josefin Sans', sans-serif;
-    color: #1e1c12;
+    color: #3a3428;
     font-size: 0.48rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -485,7 +503,7 @@ input[type="password"] {
     font-size: 0.55rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #2a2218;
+    color: #6a5e40;
     text-align: right;
 }
 
@@ -501,7 +519,7 @@ input[type="password"] {
 
 .gauge-sublabel {
     font-family: 'Josefin Sans', sans-serif;
-    color: #4a4228;
+    color: #8a7a55;
     font-size: 0.5rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -546,7 +564,7 @@ input[type="password"] {
 }
 
 .deco-table tr:last-child td { border-bottom: none; }
-.deco-table .col-date  { color: #4a4228; font-size: 0.72rem; letter-spacing: 0.06em; }
+.deco-table .col-date  { color: #8a7a55; font-size: 0.72rem; letter-spacing: 0.06em; }
 .deco-table .col-check { color: #c8a84c; font-weight: 600; }
 .deco-table .col-tax   { color: #7a6e48; }
 .deco-table .col-keep  { color: #e8dfc8; }
@@ -1004,13 +1022,13 @@ if page == "Control Console":
         rate_label = f"{pct:.1f}% of Income" if projected_annual > 0 else "Log income to calculate"
         st.markdown('<div class="alert-item">Extraction Pressure</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="alert-detail">2026 Effective Rate — {rate_label}</div>', unsafe_allow_html=True)
-        st.markdown('<div class="alert-item" style="color:#4a4228;">System Notice</div>', unsafe_allow_html=True)
+        st.markdown('<div class="alert-item" style="color:#8a7a55;">System Notice</div>', unsafe_allow_html=True)
         st.markdown('<div class="alert-detail">The more you earn, the more they take. Plan accordingly.</div>', unsafe_allow_html=True)
 
 elif page == "Income Log":
 
     st.header("Income Log")
-    st.markdown('<div style="font-family:\'Josefin Sans\',sans-serif;font-size:0.55rem;letter-spacing:0.16em;color:#4a4228;text-transform:uppercase;margin-bottom:1.5rem;">Receipts & Jobs</div>', unsafe_allow_html=True)
+    st.markdown('<div style="font-family:\'Josefin Sans\',sans-serif;font-size:0.55rem;letter-spacing:0.16em;color:#8a7a55;text-transform:uppercase;margin-bottom:1.5rem;">Receipts & Jobs</div>', unsafe_allow_html=True)
 
     col_in1, col_in2, col_in3 = st.columns([3, 3, 1])
     with col_in1:
@@ -1078,7 +1096,7 @@ elif page == "Income Log":
 elif page == "Allocation Matrix":
 
     st.header("Allocation Matrix")
-    st.markdown('<div style="font-family:\'Josefin Sans\',sans-serif;font-size:0.55rem;letter-spacing:0.16em;color:#4a4228;text-transform:uppercase;margin-bottom:1.5rem;">Budget Planner</div>', unsafe_allow_html=True)
+    st.markdown('<div style="font-family:\'Josefin Sans\',sans-serif;font-size:0.55rem;letter-spacing:0.16em;color:#8a7a55;text-transform:uppercase;margin-bottom:1.5rem;">Budget Planner</div>', unsafe_allow_html=True)
 
     monthly_income = projected_annual / 12
 
@@ -1128,7 +1146,7 @@ elif page == "Allocation Matrix":
             rows_html += f"""
             <tr>
                 <td style="color:{color};font-size:0.65rem;letter-spacing:0.1em;padding:0.6rem 0.5rem 0.6rem 0;border-bottom:1px solid #0d0d09;text-transform:uppercase;font-weight:700;">{label}</td>
-                <td style="color:#4a4228;font-size:0.62rem;padding:0.6rem 0.5rem;border-bottom:1px solid #0d0d09;text-align:right;">{pct:.1f}%</td>
+                <td style="color:#8a7a55;font-size:0.62rem;padding:0.6rem 0.5rem;border-bottom:1px solid #0d0d09;text-align:right;">{pct:.1f}%</td>
                 <td style="color:{color};font-size:0.82rem;font-weight:600;padding:0.6rem 0 0.6rem 0.5rem;border-bottom:1px solid #0d0d09;text-align:right;">${amount:,.2f}</td>
             </tr>"""
         st.markdown(f"""
@@ -1144,7 +1162,7 @@ elif page == "Allocation Matrix":
 elif page == "Mandatory Extraction":
 
     st.header("Mandatory Extraction")
-    st.markdown('<div style="font-family:\'Josefin Sans\',sans-serif;font-size:0.55rem;letter-spacing:0.16em;color:#4a4228;text-transform:uppercase;margin-bottom:1.5rem;">Tax Planning</div>', unsafe_allow_html=True)
+    st.markdown('<div style="font-family:\'Josefin Sans\',sans-serif;font-size:0.55rem;letter-spacing:0.16em;color:#8a7a55;text-transform:uppercase;margin-bottom:1.5rem;">Tax Planning</div>', unsafe_allow_html=True)
 
     col_t1, col_t2 = st.columns(2)
     with col_t1:
@@ -1176,7 +1194,7 @@ elif page == "Mandatory Extraction":
 elif page == "Reserve Vault":
 
     st.header("Reserve Vault")
-    st.markdown('<div style="font-family:\'Josefin Sans\',sans-serif;font-size:0.55rem;letter-spacing:0.16em;color:#4a4228;text-transform:uppercase;margin-bottom:1.5rem;">Monthly Bills</div>', unsafe_allow_html=True)
+    st.markdown('<div style="font-family:\'Josefin Sans\',sans-serif;font-size:0.55rem;letter-spacing:0.16em;color:#8a7a55;text-transform:uppercase;margin-bottom:1.5rem;">Monthly Bills</div>', unsafe_allow_html=True)
 
     with st.expander("Add Monthly Bill", expanded=True):
         bill_name     = st.text_input("Bill Name", placeholder="Netflix, Insurance, GitHub, Credit Card")
@@ -1218,7 +1236,7 @@ elif page == "Reserve Vault":
 elif page == "Ledger Archives":
 
     st.header("Ledger Archives")
-    st.markdown('<div style="font-family:\'Josefin Sans\',sans-serif;font-size:0.55rem;letter-spacing:0.16em;color:#4a4228;text-transform:uppercase;margin-bottom:1.5rem;">Reports & History</div>', unsafe_allow_html=True)
+    st.markdown('<div style="font-family:\'Josefin Sans\',sans-serif;font-size:0.55rem;letter-spacing:0.16em;color:#8a7a55;text-transform:uppercase;margin-bottom:1.5rem;">Reports & History</div>', unsafe_allow_html=True)
 
     if st.session_state.checks:
         col_s1, col_s2, col_s3, col_s4 = st.columns(4)
@@ -1260,7 +1278,7 @@ elif page == "Ledger Archives":
 elif page == "System Settings":
 
     st.header("System Settings")
-    st.markdown('<div style="font-family:\'Josefin Sans\',sans-serif;font-size:0.55rem;letter-spacing:0.16em;color:#4a4228;text-transform:uppercase;margin-bottom:1.5rem;">Preferences</div>', unsafe_allow_html=True)
+    st.markdown('<div style="font-family:\'Josefin Sans\',sans-serif;font-size:0.55rem;letter-spacing:0.16em;color:#8a7a55;text-transform:uppercase;margin-bottom:1.5rem;">Preferences</div>', unsafe_allow_html=True)
 
     st.subheader("Business Deductions")
 
